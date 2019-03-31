@@ -1,8 +1,8 @@
 ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
 tens = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-hundreds = ["hundred", "thousand", "million", "trillion"]
-
+hundreds = ["hundred", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion"]
+ordinal_conv = 97
 
 def get_num_string(numarr, num):
     return numarr[num]
@@ -46,15 +46,10 @@ def parse_integer(in_int):
     output_str_array = []
     place_count = len(str(in_int))
     triple_count = int(place_count / 3 if place_count % 3 == 0 else (place_count / 3) + 1)
-
     while triple_count > 0:
         base = get_base(triple_count)
         triple_num = int(in_int / base)
         output_str_array.append(stringify_triple(get_triple_array(triple_num), triple_count))
-        # print("-------------------------")
-        # print(f"in_int = {in_int}")
-        # print(f"base = {base}")
-        # print(f"triple_num = {triple_num}")
         in_int = in_int - (triple_num * base)
         triple_count = triple_count - 1
     return "".join(output_str_array)
@@ -65,3 +60,24 @@ def construct_complete_string(lower, upper):
     for i in range(lower, upper + 1):
         complete.append(parse_integer(i))
     return "".join(complete)
+
+
+def get_prob(check, in_str):
+    letter_counts = []
+    for i in range(0, 26):
+        letter_counts.append(0)
+    for c in in_str:
+        char_curr = ord(c) - ordinal_conv
+        letter_counts[char_curr] = letter_counts[char_curr] + 1
+    return letter_counts[ord(check) - ordinal_conv] / len(in_str)
+
+
+def pretty_percent(percent):
+    return f"{round(percent, 4) * 100}%"
+
+
+def get_answer(the_char, the_lownum, the_highnum):
+    return pretty_percent(get_prob(the_char, construct_complete_string(the_lownum, the_highnum)))
+
+print(get_answer('q', 999999999999999, 1000000000000001))
+print(parse_integer(1002003004005001))
