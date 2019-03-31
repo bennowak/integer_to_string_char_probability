@@ -1,7 +1,3 @@
-
-in_int = 212001;
-
-
 ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
 tens = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
@@ -37,7 +33,7 @@ def stringify_triple(triple, group_index):
             else:
                 string_array[1] = f"{tens[triple[1]]}"
                 string_array[2] = f"{ones[triple[2]]}"
-    if group_index > 1:
+    if group_index > 1 and (string_array[0] != "" or string_array[1] != "" or string_array[2] != "" ):
         string_array[3] = hundreds[group_index - 1]
     return str("".join(string_array))
 
@@ -50,7 +46,6 @@ def parse_integer(in_int):
     output_str_array = []
     place_count = len(str(in_int))
     triple_count = int(place_count / 3 if place_count % 3 == 0 else (place_count / 3) + 1)
-    print(f"triple_count = {triple_count}")
 
     while triple_count > 0:
         base = get_base(triple_count)
@@ -65,5 +60,8 @@ def parse_integer(in_int):
     return "".join(output_str_array)
 
 
-print(parse_integer(in_int))
-
+def construct_complete_string(lower, upper):
+    complete = []
+    for i in range(lower, upper + 1):
+        complete.append(parse_integer(i))
+    return "".join(complete)

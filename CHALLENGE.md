@@ -1,5 +1,3 @@
-# integer_to_string_char_probability
-
 # Challenge
 Using a web stack of your choice create a small web application to answer the following question:
 
