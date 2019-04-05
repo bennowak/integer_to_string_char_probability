@@ -100,6 +100,6 @@ def get_answer(the_char, the_lownum, the_highnum):
 
 
 #Testing
-print(get_answer('q', 999999999999999, 1000000000000001))
+print(get_answer('q', 1, 123))
 print(parse_integer(1000000000000001))
 print(parse_integer(1002003004005001))
