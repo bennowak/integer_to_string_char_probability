@@ -6,3 +6,6 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse("Hello, world. You're at the home index.")
+
+def calculate(request):
+    return HttpResponse("")
